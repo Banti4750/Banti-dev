@@ -1,1167 +1,1245 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banti Kumar | Full-Stack Developer</title>
+    <title>Banti Kumar — Full-Stack Developer & DevOps</title>
+    <meta name="description" content="Banti Kumar — Full-Stack Developer learning DevOps. Building scalable web apps with React, Node.js, microservices, and exploring AWS, DigitalOcean, Docker, Kubernetes, Prometheus, Grafana, CI/CD, serverless, EC2 and load balancing.">
+    <meta name="keywords" content="Full-Stack Developer, DevOps, AWS, DigitalOcean, Docker, Kubernetes, Prometheus, Grafana, CI/CD, Serverless, EC2, Load Balancer, Microservices, React, Node.js">
+    <meta property="og:title" content="Banti Kumar — Full-Stack Developer & DevOps">
+    <meta property="og:description" content="Full-Stack Developer learning DevOps — Docker, Kubernetes, AWS, Prometheus, Grafana, CI/CD, microservices.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+                    },
+                    colors: {
+                        ink: {
+                            950: '#08090b',
+                            900: '#0c0d10',
+                            800: '#15171c',
+                            700: '#1c1f26',
+                            600: '#262a33',
+                        },
+                        acid: {
+                            DEFAULT: '#a3e635',
+                            soft: '#84cc16',
+                        },
+                        violet: {
+                            glow: '#a78bfa',
+                        }
+                    },
                     animation: {
-                        'fade-in': 'fadeIn 1s ease-in-out',
-                        'float': 'float 6s ease-in-out infinite',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'marquee': 'marquee 40s linear infinite',
+                        'blink': 'blink 1.2s step-end infinite',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(24px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px #3b82f6, 0 0 10px #3b82f6, 0 0 15px #3b82f6' },
-                            '100%': { boxShadow: '0 0 10px #3b82f6, 0 0 20px #3b82f6, 0 0 30px #3b82f6' },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '1' },
                         }
                     }
                 }
             }
         }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body { background: #08090b; color: #e7e9ee; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-image:
+                radial-gradient(circle at 20% 0%, rgba(167, 139, 250, 0.08), transparent 40%),
+                radial-gradient(circle at 80% 50%, rgba(163, 230, 53, 0.06), transparent 45%);
+            background-attachment: fixed;
+        }
+
+        /* Dotted grid backdrop */
+        .grid-bg {
+            background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Spotlight cursor */
+        .spotlight {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(163, 230, 53, 0.06), transparent 40%);
+            transition: background 0.1s;
+        }
+
+        /* Glass card */
+        .glass {
+            background: rgba(20, 22, 28, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+        }
+        .glass:hover {
+            border-color: rgba(163, 230, 53, 0.25);
+        }
+
+        /* Section heading rule */
+        .section-rule {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #9ca3af;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .section-rule::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent);
+        }
+
+        /* Project card hover image */
+        .proj-card { transition: transform 0.4s cubic-bezier(.2,.8,.2,1), border-color 0.3s; }
+        .proj-card:hover { transform: translateY(-4px); }
+        .proj-card .proj-img { transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.5s; filter: grayscale(20%) brightness(0.85); }
+        .proj-card:hover .proj-img { transform: scale(1.04); filter: grayscale(0%) brightness(1); }
+
+        /* Chip */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.25rem 0.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #cbd5e1;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+        }
+        .chip-acid { color: #a3e635; border-color: rgba(163,230,53,0.3); background: rgba(163,230,53,0.06); }
+
+        /* Btn */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.7rem 1.25rem;
+            background: #a3e635; color: #0a0a0a;
+            font-weight: 600; font-size: 0.875rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { background: #bef264; transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(163,230,53,0.5); }
+
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.7rem 1.25rem;
+            background: transparent; color: #e7e9ee;
+            font-weight: 500; font-size: 0.875rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-ghost:hover { border-color: #a3e635; color: #a3e635; }
+
+        .btn-sm {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.4rem 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .btn-sm-primary { background: #a3e635; color: #0a0a0a; }
+        .btn-sm-primary:hover { background: #bef264; }
+        .btn-sm-ghost { color: #cbd5e1; border: 1px solid rgba(255,255,255,0.12); }
+        .btn-sm-ghost:hover { color: #a3e635; border-color: rgba(163,230,53,0.4); }
+
+        /* Marquee */
+        .marquee-track {
+            display: flex; gap: 4rem;
+            animation: marquee 40s linear infinite;
+            width: max-content;
+        }
+
+        /* Cursor */
+        .caret::after {
+            content: '_';
+            color: #a3e635;
+            animation: blink 1.2s step-end infinite;
+            margin-left: 0.1em;
+        }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Hide scroll bar styling */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #08090b; }
+        ::-webkit-scrollbar-thumb { background: #1c1f26; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #262a33; }
+
+        /* Selection */
+        ::selection { background: rgba(163, 230, 53, 0.25); color: #fff; }
+
+        /* Status pill */
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 999px; background: #a3e635;
+            box-shadow: 0 0 0 4px rgba(163,230,53,0.18);
+            animation: pulseSoft 3s ease-in-out infinite;
+        }
+
+        /* Timeline */
+        .timeline-item { position: relative; padding-left: 2rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: 0; top: 0.5rem;
+            width: 10px; height: 10px; border-radius: 999px;
+            background: #a3e635; box-shadow: 0 0 0 4px rgba(163,230,53,0.15);
+        }
+        .timeline-item::after {
+            content: ''; position: absolute; left: 4px; top: 1.5rem; bottom: -1.5rem;
+            width: 1px; background: linear-gradient(180deg, rgba(163,230,53,0.4), transparent);
+        }
+        .timeline-item:last-child::after { display: none; }
+
+        /* Project image fallback */
+        .proj-img-wrap {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: linear-gradient(135deg, #15171c, #08090b);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .proj-img { width: 100%; height: 100%; object-fit: cover; }
+        .proj-shine {
+            position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(180deg, transparent 60%, rgba(8,9,11,0.85) 100%);
+        }
+    </style>
 </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
-    <!-- Navigation -->
-    <nav
-        class="fixed w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-800">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center items-center h-16">
-                <!-- <div class="font-bold text-xl text-blue-600 dark:text-blue-400">
-                    Banti Kumar
-                </div> -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition">About</a>
-                    <a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</a>
-                    <a href="#experience" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
-                    <a href="#achievements"
-                        class="hover:text-blue-600 dark:hover:text-blue-400 transition">Achievements</a>
-                    <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Contact</a>
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:block"></i>
-                    </button>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="p-2">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+<body class="font-sans text-gray-200 antialiased">
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Top status bar -->
+    <div class="border-b border-white/5 bg-ink-950/80 backdrop-blur-md relative z-20">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-9 text-[11px] font-mono text-gray-500">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-2"><span class="status-dot"></span><span class="text-acid">online</span></span>
+                <span class="hidden sm:inline">/ open to opportunities</span>
+            </div>
+            <div class="hidden md:flex items-center gap-4">
+                <span>bhopal, in</span>
+                <span>·</span>
+                <span id="clock">--:--</span>
             </div>
         </div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu"
-            class="hidden md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md pb-4 px-4 border-t border-gray-200 dark:border-gray-800">
-            <div class="flex flex-col space-y-3">
-                <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition">About</a>
-                <a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</a>
-                <a href="#experience" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
-                <a href="#achievements" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Achievements</a>
-                <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Contact</a>
-                <button id="theme-toggle-mobile"
-                    class="text-left hover:text-blue-600 dark:hover:text-blue-400 transition">
-                    Toggle Dark Mode
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 border-b border-white/5 bg-ink-950/70 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+            <a href="#top" class="flex items-center gap-2 font-mono text-sm">
+                <span class="w-7 h-7 rounded-md bg-acid text-ink-950 flex items-center justify-center font-bold">B</span>
+                <span class="hidden sm:block text-white">banti<span class="text-acid">.</span>dev</span>
+            </a>
+            <div class="hidden md:flex items-center gap-1 font-mono text-[13px]">
+                <a href="#about" class="px-3 py-2 text-gray-400 hover:text-acid transition">about</a>
+                <a href="#projects" class="px-3 py-2 text-gray-400 hover:text-acid transition">work</a>
+                <a href="#experience" class="px-3 py-2 text-gray-400 hover:text-acid transition">experience</a>
+                <a href="#achievements" class="px-3 py-2 text-gray-400 hover:text-acid transition">stats</a>
+                <a href="#contact" class="px-3 py-2 text-gray-400 hover:text-acid transition">contact</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/Banti4750" target="_blank" class="text-gray-400 hover:text-acid transition" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/Banti_Kumar_62" target="_blank" class="text-gray-400 hover:text-acid transition" aria-label="Twitter">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="#contact" class="hidden sm:inline-flex btn-sm btn-sm-primary">
+                    let's talk <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+                <button id="mobile-menu-button" class="md:hidden p-2 text-gray-300">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-ink-950 px-6 py-4 font-mono text-sm space-y-2">
+            <a href="#about" class="block py-1 text-gray-400 hover:text-acid">about</a>
+            <a href="#projects" class="block py-1 text-gray-400 hover:text-acid">work</a>
+            <a href="#experience" class="block py-1 text-gray-400 hover:text-acid">experience</a>
+            <a href="#achievements" class="block py-1 text-gray-400 hover:text-acid">stats</a>
+            <a href="#contact" class="block py-1 text-gray-400 hover:text-acid">contact</a>
+        </div>
     </nav>
 
-    <!-- Hero Secion -->
-    <section
-        class="min-h-screen flex items-center pt-16 bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-fade-in">
-                    <div
-                        class="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium mb-4">
-                        🚀 Available for Full-Stack Roles
-                    </div>
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                        Hi, I'm <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Banti
-                            Kumar</span>
-                    </h1>
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-700 dark:text-gray-300">
-                        Full-Stack Developer & Blockchain Enthusiast
+    <!-- HERO -->
+    <section id="top" class="relative overflow-hidden">
+        <div class="absolute inset-0 grid-bg opacity-50"></div>
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-acid/5 rounded-full blur-3xl"></div>
+        <div class="absolute top-20 -right-40 w-96 h-96 bg-violet-glow/10 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-32">
+            <div class="font-mono text-xs text-gray-500 mb-8 flex items-center gap-2">
+                <span class="text-acid">~/</span>
+                <span>banti</span>
+                <span class="text-gray-700">/</span>
+                <span>portfolio</span>
+                <span class="text-gray-700">/</span>
+                <span class="text-acid">main</span>
+            </div>
+
+            <div class="max-w-4xl">
+                <p class="font-mono text-sm text-acid mb-6 flex items-center gap-2">
+                    <span class="w-8 h-px bg-acid"></span>
+                    <span>hello world, i'm</span>
+                </p>
+                <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white leading-[0.95] mb-6">
+                    Banti Kumar<span class="text-acid">.</span>
+                </h1>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-light text-gray-400 mb-8 max-w-3xl leading-tight">
+                    A <span class="text-white font-medium">full-stack developer</span> shipping scalable products with React &amp; Node, currently going deep on <span class="text-white font-medium">DevOps &amp; cloud</span><span class="caret"></span>
+                </h2>
+
+                <p class="text-gray-500 max-w-2xl mb-10 leading-relaxed">
+                    Computer Science student at Patel College, Bhopal · graduating 2026.
+                    1600+ DSA problems solved · College rank #1 on GeeksforGeeks · currently
+                    interning at Orange Essence Technologies and learning Docker, Kubernetes,
+                    AWS, Prometheus, Grafana and CI/CD pipelines.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 mb-10">
+                    <a href="#projects" class="btn-primary">
+                        view my work <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="#contact" class="btn-ghost">
+                        get in touch
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AVYtqhewr6tkZB3pgaYe5T9iA6ndo2ah/view" target="_blank" class="btn-ghost">
+                        <i class="fas fa-file-arrow-down text-xs"></i> resume
+                    </a>
+                    <!-- <a href="https://drive.google.com/file/d/1PyZOk-pDqHYp-Vpy6KxjpELkE_TCF5fK/view?usp=drive_link" target="_blank" class="btn-ghost">
+                        <i class="fas fa-file-arrow-down text-xs"></i> resume / web3
+                    </a> -->
+                </div>
+
+                <div class="flex items-center gap-6 font-mono text-xs text-gray-500">
+                    <a href="https://github.com/Banti4750" target="_blank" class="hover:text-acid transition flex items-center gap-2">
+                        <i class="fab fa-github"></i> github
+                    </a>
+                    <a href="https://x.com/Banti_Kumar_62" target="_blank" class="hover:text-acid transition flex items-center gap-2">
+                        <i class="fab fa-x-twitter"></i> twitter
+                    </a>
+                    <a href="mailto:bantikumar6203818460@gmail.com" class="hover:text-acid transition flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> email
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee tech stack -->
+        <div class="border-y border-white/5 py-5 overflow-hidden bg-ink-900/60">
+            <div class="marquee-track font-mono text-2xl md:text-3xl font-light text-gray-500 whitespace-nowrap">
+                <div class="flex items-center gap-12 px-6">
+                    <span>React</span><span class="text-acid">✦</span>
+                    <span>TypeScript</span><span class="text-acid">✦</span>
+                    <span>Node.js</span><span class="text-acid">✦</span>
+                    <span>Docker</span><span class="text-acid">✦</span>
+                    <span>Kubernetes</span><span class="text-acid">✦</span>
+                    <span>AWS</span><span class="text-acid">✦</span>
+                    <span>EC2</span><span class="text-acid">✦</span>
+                    <span>DigitalOcean</span><span class="text-acid">✦</span>
+                    <span>Prometheus</span><span class="text-acid">✦</span>
+                    <span>Grafana</span><span class="text-acid">✦</span>
+                    <span>CI/CD</span><span class="text-acid">✦</span>
+                    <span>Serverless</span><span class="text-acid">✦</span>
+                    <span>Microservices</span><span class="text-acid">✦</span>
+                    <span>Load Balancer</span><span class="text-acid">✦</span>
+                    <span>PostgreSQL</span><span class="text-acid">✦</span>
+                    <span>Redis</span><span class="text-acid">✦</span>
+                </div>
+                <div class="flex items-center gap-12 px-6" aria-hidden="true">
+                    <span>React</span><span class="text-acid">✦</span>
+                    <span>TypeScript</span><span class="text-acid">✦</span>
+                    <span>Node.js</span><span class="text-acid">✦</span>
+                    <span>Docker</span><span class="text-acid">✦</span>
+                    <span>Kubernetes</span><span class="text-acid">✦</span>
+                    <span>AWS</span><span class="text-acid">✦</span>
+                    <span>EC2</span><span class="text-acid">✦</span>
+                    <span>DigitalOcean</span><span class="text-acid">✦</span>
+                    <span>Prometheus</span><span class="text-acid">✦</span>
+                    <span>Grafana</span><span class="text-acid">✦</span>
+                    <span>CI/CD</span><span class="text-acid">✦</span>
+                    <span>Serverless</span><span class="text-acid">✦</span>
+                    <span>Microservices</span><span class="text-acid">✦</span>
+                    <span>Load Balancer</span><span class="text-acid">✦</span>
+                    <span>PostgreSQL</span><span class="text-acid">✦</span>
+                    <span>Redis</span><span class="text-acid">✦</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="relative py-24 md:py-32">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="section-rule mb-12 reveal">
+                <span>01 / about</span>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 mb-16">
+                <div class="md:col-span-7 reveal">
+                    <h2 class="text-3xl md:text-5xl font-semibold text-white mb-6 leading-tight">
+                        I build software that's <span class="text-acid">fast</span>, <span class="text-acid">readable</span> and ships on time.
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
-                        Building scalable web applications with React, Node.js, and exploring Web3 technologies.
-                        Solved 1000+ DSA problems and passionate about innovation.
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Currently a Web Developer Intern at Orange Essence Technologies — building B2B platforms,
+                        leading database migrations, and writing the kind of code that future-me won't curse at.
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#contact"
-                            class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1">
-                            Get In Touch
-                        </a>
-                        <a href="#projects"
-                            class="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">
-                            View Projects
-                        </a>
-                    </div>
-                    <div class="flex items-center gap-6 mt-8">
-                        <a href="https://github.com/Banti4750" target="_blank"
-                            class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                            <i class="fab fa-github text-2xl"></i>
-                        </a>
-                        <a href="https://x.com/Banti_Kumar_62" target="_blank"
-                            class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                            <i class="fab fa-twitter text-2xl"></i>
-                        </a>
-                        <a href="mailto:bantikumar6203818460@gmail.com"
-                            class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                            <i class="fas fa-envelope text-2xl"></i>
-                        </a>
-                        <a class="text-xs px-2 py-1 bg-black/10 dark:bg-white/10 rounded"
-                            href="https://drive.google.com/file/d/1_AQ-LyyaKg6u9OONb9EpI1S0xGSzzdL_/view?usp=sharing"
-                            target="_blank">Resume web2</a>
-                        <a class="text-xs px-2 py-1 bg-black/10 dark:bg-white/10 rounded"
-                            href="https://drive.google.com/file/d/1PyZOk-pDqHYp-Vpy6KxjpELkE_TCF5fK/view?usp=drive_link"
-                            target="_blank">Resume web3</a>
+                    <p class="text-gray-400 leading-relaxed">
+                        Outside of work I'm leveling up on <span class="text-white">DevOps &amp; cloud</span> —
+                        Docker, Kubernetes, AWS (EC2, load balancers, serverless), DigitalOcean, Prometheus +
+                        Grafana for observability, and CI/CD pipelines for microservices.
+                    </p>
+                </div>
+                <div class="md:col-span-5 reveal">
+                    <div class="glass rounded-xl p-6 font-mono text-sm">
+                        <div class="flex items-center gap-2 mb-4 pb-4 border-b border-white/5">
+                            <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+                            <span class="w-3 h-3 rounded-full bg-acid"></span>
+                            <span class="ml-2 text-xs text-gray-500">~/about.json</span>
+                        </div>
+                        <pre class="text-gray-300 leading-relaxed text-[13px]"><span class="text-gray-500">{</span>
+  <span class="text-violet-glow">"role"</span>: <span class="text-acid">"Full-Stack Developer"</span>,
+  <span class="text-violet-glow">"location"</span>: <span class="text-acid">"Bhopal, IN"</span>,
+  <span class="text-violet-glow">"focus"</span>: [<span class="text-acid">"Full-Stack"</span>, <span class="text-acid">"DevOps"</span>, <span class="text-acid">"Cloud"</span>],
+  <span class="text-violet-glow">"graduating"</span>: <span class="text-orange-300">2026</span>,
+  <span class="text-violet-glow">"problems_solved"</span>: <span class="text-orange-300">1600</span>,
+  <span class="text-violet-glow">"available"</span>: <span class="text-acid">true</span>
+<span class="text-gray-500">}</span></pre>
                     </div>
                 </div>
-                <div class="animate-float hidden md:block">
-                    <div class="relative max-w-md mx-auto">
-                        <div
-                            class="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl blur-xl animate-glow">
-                        </div>
-                        <div class="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-2xl">
-                            <div class="text-center">
-                                <div
-                                    class="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-4xl font-bold">
-                                    BK
-                                </div>
-                                <h3 class="text-xl font-semibold mb-2">Full-Stack Developer</h3>
-                                <div class="flex justify-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                                    <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/50 rounded">React</span>
-                                    <span class="px-2 py-1 bg-green-100 dark:bg-green-900/50 rounded">Node.js</span>
-                                    <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900/50 rounded">Web3</span>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+
+            <!-- Bento skills -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 reveal">
+                <div class="glass rounded-xl p-5">
+                    <div class="font-mono text-[11px] text-gray-500 mb-3">// languages</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">TypeScript</span>
+                        <span class="chip">C/C++</span>
+
+
+                        <span class="chip">SQL</span>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-5">
+                    <div class="font-mono text-[11px] text-gray-500 mb-3">// frameworks</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="chip">React</span>
+                        <span class="chip">Next.js</span>
+                        <span class="chip">Node.js</span>
+                        <span class="chip">Express</span>
+                        <span class="chip">Tailwind</span>
+                        <span class="chip">Prisma</span>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-5">
+                    <div class="font-mono text-[11px] text-gray-500 mb-3">// databases</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="chip">MongoDB</span>
+                        <span class="chip">PostgreSQL</span>
+                        <span class="chip">MySQL</span>
+                        <span class="chip">Redis</span>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-5">
+                    <div class="font-mono text-[11px] text-gray-500 mb-3">// devops &amp; cloud</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="chip">Docker</span>
+                        <span class="chip">Kubernetes</span>
+                        <span class="chip">AWS</span>
+                        <span class="chip">EC2</span>
+                        <span class="chip">DigitalOcean</span>
+                        <span class="chip">Prometheus</span>
+                        <span class="chip">Grafana</span>
+                        <span class="chip">CI/CD</span>
+                        <span class="chip">Serverless</span>
+                        <span class="chip">Load Balancer</span>
+                        <span class="chip">Microservices</span>
+                        <span class="chip">Git</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white dark:bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-slide-up">
-                    <p class="text-lg mb-6 leading-relaxed">
-                        I'm a passionate Computer Science student at Patel College of Science and Technology, Bhopal,
-                        graduating in 2026. With expertise in full-stack development and blockchain technologies,
-                        I've built scalable applications using modern tech stacks.
-                    </p>
-                    <p class="text-lg mb-6 leading-relaxed">
-                        Currently working as a Web Developer Intern at Orange Essence Technologies, where I've
-                        contributed to
-                        B2B platforms, migrated databases, and improved system performance. I'm passionate about solving
-                        complex problems and have solved over 1000+ DSA problems across various platforms.
-                    </p>
-                    <div class="flex flex-wrap gap-4 mt-8">
+    <!-- PROJECTS -->
+    <section id="projects" class="relative py-24 md:py-32 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="section-rule mb-12 reveal">
+                <span>02 / selected work</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-semibold text-white leading-tight max-w-2xl">
+                    Things I've shipped <span class="text-acid">recently</span>.
+                </h2>
+                <p class="font-mono text-xs text-gray-500">
+                    {{ <span class="text-acid">13</span> projects · ai · web · web3 }}
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <!-- AI Diary -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap" style="background: linear-gradient(135deg, #0f1f1a 0%, #08090b 60%);">
+                         <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/aiDiary.png" alt="DevContest">
+                        <div class="proj-shine"></div>
+                    </div>
+                        <div class="proj-shine"></div>
+                        <span class="absolute top-3 left-3 chip chip-acid">new</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">AI Diary</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                           Built cross-platform diary app with AI-powered mood and sentiment analysis
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Expo</span>
+                             <span class="chip">Node.js</span>
+                             <span class="chip">Gemini API</span>
+                            <span class="chip">MongoDB</span>
+                            <span class="chip">Tailwind</span>
+                            <span class="chip">Render</span>
+                        </div>
                         <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                            <span class="text-sm font-medium">Available for opportunities</span>
+
+                            <a href="https://github.com/Banti4750/ai-dairy-backend" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                             <a href=" https://drive.google.com/file/d/1iKfiFwV0QYRa6CfQg5qvb10hrSCSOzut/view" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> loom
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Call AI -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap" style="background: linear-gradient(135deg, #0f1f1a 0%, #08090b 60%);">
+                         <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/callAi.png" alt="DevContest">
+                        <div class="proj-shine"></div>
+                    </div>
+                        <span class="absolute top-3 left-3 chip chip-acid">new</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Call AI</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                          Built AI-powered calorie tracking app using image recognition to analyze meals instantly
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                              <span class="chip">Expo</span>
+                            <span class="chip">Node.js</span>
+                            <span class="chip">Gemini API</span>
+                             <span class="chip">MongoDB</span>
+                            <span class="chip">Tailwind</span>
+                            <span class="chip">Render</span>
+
                         </div>
                         <div class="flex items-center gap-2">
-                            <i class="fas fa-map-marker-alt text-gray-500"></i>
-                            <span class="text-sm">Bhopal, Madhya Pradesh, India</span>
+                            <a href="https://github.com/Banti4750/Cal-AI" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                             <a href="https://calai.edgeone.app/" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> demo
+                            </a>
                         </div>
                     </div>
+                </article>
+
+                <!-- GenZ AI -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/GenZAI.png" alt="GenZ AI">
+                        <div class="proj-shine"></div>
+                        <!-- <span class="absolute top-3 left-3 chip chip-acid">in progress</span> -->
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">GenZ AI</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Write, debug, and optimize code effortlessly with intelligent assistance and an in-browser runtime.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Next.js</span>
+                            <span class="chip">WebContainer</span>
+                            <span class="chip">MongoDB</span>
+                            <span class="chip">Monaco</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://github.com/Banti4750/vibe-code-editer" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- DevContest -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/DevContest.png" alt="DevContest">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">DevContest</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Elite developer arena. Real-world challenges, prizes and competitive coding — built on a real-time stack.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">React</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">MongoDB</span>
+                            <span class="chip">WebSocket</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://devforces-frontend-faop.vercel.app/" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i> demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Binomo -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/binomo.png" alt="Binomo">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Binomo Clone</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Sophisticated web-based trading platform replicating the core trading-engine functionality of Binomo.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">React</span>
+                            <span class="chip">Node.js</span>
+                            <span class="chip">MySQL</span>
+                            <span class="chip">Tailwind</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://drive.google.com/file/d/1ADtIQaS9JscqzFxb42z_wIg59HjP_vrt/view?usp=sharing" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-video text-[10px]"></i> loom
+                            </a>
+                            <a href="https://github.com/Banti4750/binomo-clone" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Probo -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/probo.jpeg" alt="Probo">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Probo Clone</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Full-stack prediction market platform with custom order-matching engine and AMM-style dynamic pricing.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">React</span>
+                            <span class="chip">Node.js</span>
+                            <span class="chip">Prisma</span>
+                            <span class="chip">PostgreSQL</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://www.loom.com/share/33de5fc4e31c4e86bcf0e595d69f5130?sid=752f024a-03d3-49c3-a42a-fe85de43c63c" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-video text-[10px]"></i> loom
+                            </a>
+                            <a href="https://github.com/Banti4750/probX-V1" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Chat -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/chat.jpeg" alt="Chat">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Chat</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Real-time messaging app with microservices, WebSocket transport, Redis OTP and a RabbitMQ message queue.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Next.js</span>
+                            <span class="chip">WebSocket</span>
+                            <span class="chip">Prisma</span>
+                            <span class="chip">Redis</span>
+                            <span class="chip">RabbitMQ</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://github.com/Banti4750/Chat-App-Microservices" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Binance -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/binance.jpeg" alt="Binance">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Binance Indexer</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Real-time blockchain indexer with microservices architecture for scalable on-chain processing & monitoring.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">React</span>
+                            <span class="chip">Node.js</span>
+                            <span class="chip">Prisma</span>
+                            <span class="chip">WebSocket</span>
+                            <span class="chip">ETH</span>
+                            <span class="chip">ERC-20</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://github.com/Banti4750/binance" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Solana Staking -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/stack_sol.jpeg" alt="Solana Staking">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Solana Staking</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Modern Solana staking contract built with the Anchor framework — SOL staking with a dynamic points system.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Rust</span>
+                            <span class="chip">Anchor</span>
+                            <span class="chip">Solana</span>
+                            <span class="chip">React</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://stake-sol-git-main-banti-kumars-projects.vercel.app/" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i> demo
+                            </a>
+                            <a href="https://github.com/Banti4750/Stake-Sol" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ETH Staking -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/stackETH.jpeg" alt="ETH Staking">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">ETH Staking</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Secure Ethereum staking contract with Trump Coin rewards — reentrancy protection and pausable functionality.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Solidity</span>
+                            <span class="chip">ERC-20</span>
+                            <span class="chip">Ethereum</span>
+                            <span class="chip">React</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://reward-eth-frontend-d66f.vercel.app/" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i> demo
+                            </a>
+                            <a href="https://github.com/Banti4750/StakeETHReward?tab=readme-ov-file" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- InheritETH -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/inheriteth.jpeg" alt="InheritETH">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">InheritETH</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Decentralized ETH inheritance system with Solidity smart contracts and Chainlink automation for nominee transfers.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Solidity</span>
+                            <span class="chip">Foundry</span>
+                            <span class="chip">React</span>
+                            <span class="chip">Chainlink</span>
+                            <span class="chip">ETH</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://inherit-eth-client.vercel.app/" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i> demo
+                            </a>
+                            <a href="https://github.com/Banti4750/InheritETH" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sundown -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/sun-down.jpeg" alt="Sundown">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Sundown</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            Sundown Studio landing page — modern UI, smooth animations and interactive design.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">React</span>
+                            <span class="chip">Tailwind</span>
+                            <span class="chip">WebSocket</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://sundown-git-main-banti-kumars-projects.vercel.app/" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i> demo
+                            </a>
+                            <a href="https://github.com/Banti4750/Sundown" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Wallet -->
+                <article class="proj-card glass rounded-xl overflow-hidden flex flex-col">
+                    <div class="proj-img-wrap">
+                        <img class="proj-img" src="projectimage/wallet.jpeg" alt="Phantom Wallet">
+                        <div class="proj-shine"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-semibold text-white mb-2">Phantom Wallet</h3>
+                        <p class="text-sm text-gray-400 mb-4 flex-1">
+                            ETH wallet for sending and receiving ETH — simple flows, real on-chain transactions.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="chip">Next.js</span>
+                            <span class="chip">React</span>
+                            <span class="chip">Prisma</span>
+                            <span class="chip">Tailwind</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://eth-dapp-final.vercel.app/" target="_blank" class="btn-sm btn-sm-primary">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i> demo
+                            </a>
+                            <a href="https://github.com/Banti4750/wallet" target="_blank" class="btn-sm btn-sm-ghost">
+                                <i class="fab fa-github"></i> code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="relative py-24 md:py-32 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="section-rule mb-12 reveal">
+                <span>03 / experience</span>
+            </div>
+
+            <h2 class="text-3xl md:text-5xl font-semibold text-white leading-tight mb-12 reveal">
+                Where I'm <span class="text-acid">building</span>.
+            </h2>
+
+            <div class="grid md:grid-cols-12 gap-8">
+                <div class="md:col-span-4 reveal">
+                    <p class="text-gray-500 leading-relaxed text-sm">
+                        A timeline of where I've shipped real code with real users and real consequences.
+                    </p>
                 </div>
-                <div class="animate-slide-up">
-                    <h3 class="text-xl font-semibold mb-6">Technical Skills</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-medium mb-2">Languages</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">JavaScript</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm">TypeScript</span>
-                                <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">C/C++</span>
-                                <span
-                                    class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full text-sm">Solidity</span>
-                                <span
-                                    class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 rounded-full text-sm">Rust</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm">SQL</span>
-                            </div>
+                <div class="md:col-span-8 space-y-10 reveal">
+                    <div class="timeline-item">
+                        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+                            <h3 class="text-xl font-semibold text-white">Web Developer Intern</h3>
+                            <span class="font-mono text-xs text-acid">mar 2025 → present</span>
                         </div>
-                        <div>
-                            <h4 class="font-medium mb-2">Frameworks & Libraries</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-800 dark:text-cyan-200 rounded-full text-sm">React</span>
-                                <span class="px-3 py-1 bg-black/10 dark:bg-white/10 rounded-full text-sm">Next.js</span>
-                                <span
-                                    class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full text-sm">Node.js</span>
-                                <span
-                                    class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">Express.js</span>
-                                <span
-                                    class="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full text-sm">Tailwind
-                                    CSS</span>
-                                <span
-                                    class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 rounded-full text-sm">Prisma</span>
-                            </div>
+                        <p class="text-gray-400 mb-4 font-medium">Orange Essence Technologies</p>
+                        <ul class="space-y-3 text-gray-400 text-sm leading-relaxed">
+                            <li class="flex gap-3">
+                                <span class="text-acid mt-1.5">→</span>
+                                <span>Owned both frontend and backend tasks on internal B2B platforms with React and Node.js, shipping scalable modules that <span class="text-white">cut page load times by 25%</span>.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-acid mt-1.5">→</span>
+                                <span>Led the backend migration from <span class="text-white">MongoDB to MySQL</span>, redesigning the schema and replacing Mongoose with Prisma ORM — <span class="text-white">30% faster queries</span>.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-acid mt-1.5">→</span>
+                                <span>Refactored REST APIs with Express + Prisma, improving maintainability and lifting test coverage by 20%.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-acid mt-1.5">→</span>
+                                <span>Built responsive, accessible UI components in Tailwind — driving a <span class="text-white">15% increase in user engagement</span>.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="mt-24 grid md:grid-cols-2 gap-5">
+                <div class="glass rounded-xl p-6 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-acid/10 border border-acid/20 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-acid"></i>
                         </div>
-                        <div>
-                            <h4 class="font-medium mb-2">Databases & Tools</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span
-                                    class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full text-sm">MongoDB</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm">PostgreSQL</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm">MySQL</span>
-                                <span
-                                    class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 rounded-full text-sm">Git</span>
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full text-sm">Docker</span>
-                                <span
-                                    class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full text-sm">AWS</span>
-                            </div>
+                        <span class="font-mono text-xs text-gray-500">// formal education</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-1">B.Tech, Computer Science & Engineering</h3>
+                    <p class="text-gray-400 text-sm mb-2">Patel College of Science and Technology · Bhopal, MP</p>
+                    <p class="font-mono text-xs text-acid">april 2022 → may 2026</p>
+                </div>
+                <div class="glass rounded-xl p-6 reveal">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-violet-glow/10 border border-violet-glow/20 flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-violet-glow"></i>
                         </div>
+                        <span class="font-mono text-xs text-gray-500">// continuous learning</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex gap-2"><span class="text-acid">✓</span> Full-Stack Web Dev — 100xDevs (Harkirat Singh)</li>
+                        <li class="flex gap-2"><span class="text-acid">✓</span> Blockchain & Smart Contracts — 100xDevs</li>
+                        <li class="flex gap-2"><span class="text-acid">✓</span> DevOps — 100xDevs</li>
+                        <li class="flex gap-2"><span class="text-acid">✓</span> DSA — GeeksforGeeks, Coding Blocks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="relative py-24 md:py-32 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="section-rule mb-12 reveal">
+                <span>04 / by the numbers</span>
+            </div>
+
+            <h2 class="text-3xl md:text-5xl font-semibold text-white leading-tight mb-12 reveal">
+                Stats from the <span class="text-acid">arena</span>.
+            </h2>
+
+            <!-- Big stat row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5 reveal">
+                <div class="glass rounded-xl p-6">
+                    <div class="font-mono text-[11px] text-gray-500 mb-2">total problems</div>
+                    <div class="text-4xl md:text-5xl font-bold text-white">1600<span class="text-acid">+</span></div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="font-mono text-[11px] text-gray-500 mb-2">gfg college rank</div>
+                    <div class="text-4xl md:text-5xl font-bold text-white">#<span class="text-acid">1</span></div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="font-mono text-[11px] text-gray-500 mb-2">platforms active</div>
+                    <div class="text-4xl md:text-5xl font-bold text-white">4<span class="text-acid">+</span></div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="font-mono text-[11px] text-gray-500 mb-2">cadence</div>
+                    <div class="text-4xl md:text-5xl font-bold text-white">daily<span class="text-acid">.</span></div>
+                </div>
+            </div>
+
+            <!-- Platform breakdown -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3 reveal">
+                <div class="glass rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white">GeeksforGeeks</h3>
+                        <i class="fas fa-code text-acid"></i>
+                    </div>
+                    <div class="space-y-1.5 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-500">global rank</span><span class="text-white">#900</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">college rank</span><span class="text-acid">#1</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">score</span><span class="text-white">3100+</span></div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white">LeetCode</h3>
+                        <i class="fas fa-brain text-acid"></i>
+                    </div>
+                    <div class="space-y-1.5 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-500">solved</span><span class="text-white">500+</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">contest rating</span><span class="text-white">1490+</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">status</span><span class="text-acid">active</span></div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white">Codeforces</h3>
+                        <i class="fas fa-trophy text-acid"></i>
+                    </div>
+                    <div class="space-y-1.5 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-500">max rating</span><span class="text-white">1052</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">type</span><span class="text-white">competitive</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">status</span><span class="text-acid">regular</span></div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-white">CodeChef</h3>
+                        <i class="fas fa-medal text-acid"></i>
+                    </div>
+                    <div class="space-y-1.5 font-mono text-xs">
+                        <div class="flex justify-between"><span class="text-gray-500">max rating</span><span class="text-white">1592</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">stars</span><span class="text-acid">★★★</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">type</span><span class="text-white">contests</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800/50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- DevContest Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/GenZAI.png"
-                            alt="GenzAI">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">GenZ AI</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Write, debug, and optimize code effortlessly with intelligent assistance.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">Next.Js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">WebContainer</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">MongoDB</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Tailwind
-                                Css</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Monaco</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                target="_blank">In Progress</a>
-                            <a href="https://github.com/Banti4750/vibe-code-editer" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- closed GenZ AI Project -->
-
-                <!-- GenZ AI Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/DevContest.png"
-                            alt="GenzAI">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">DevContest</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            oin the world's most elite developer arena. Compete in real-world challenges, win
-                            substantial prizes, and accelerate your career with code that matters.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">React.Js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">Redis</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">MongoDB</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Tailwind
-                                Css</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Websocket</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                target="_blank">In Progress</a>
-                            <a href="https://devforces-frontend-faop.vercel.app/" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- closed DevContest Project -->
-
-                <!-- Binomo Clone Project -->
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/binomo.png"
-                            alt="Probo">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Binomo Clone</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Binomo Clone is a sophisticated web-based trading platform that replicates the core
-                            functionality of Binomo.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">Node.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">MySql</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Tailwind
-                                Css</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://drive.google.com/file/d/1ADtIQaS9JscqzFxb42z_wIg59HjP_vrt/view?usp=sharing"
-                                target="_blank">Loom Video</a>
-                            <a href="https://github.com/Banti4750/binomo-clone" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- binomo Project -->
-
-
-                <!-- Probo Clone Project -->
-
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/probo.jpeg"
-                            alt="Probo">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Probo Clone</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Full-stack prediction market platform with custom order-matching engine and AMM-style
-                            dynamic pricing.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">Node.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">Prisma</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">PostgreSQL</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://www.loom.com/share/33de5fc4e31c4e86bcf0e595d69f5130?sid=752f024a-03d3-49c3-a42a-fe85de43c63c"
-                                target="_blank">Loom
-                                video</a>
-                            <a href="https://github.com/Banti4750/probX-V1" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- chat Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                        <!-- <i class="fas fa-brain text-6xl text-white"></i> -->
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/chat.jpeg"
-                            alt="Chat">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Chat</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Real-time collaborative drawing application with WebSocket support and Redis for OTP and
-                            message queue.
-                        </p>
-                        <!-- <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 rounded">Tailwind
-                                CSS</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">Node.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">PostgreSQL</span>
-                        </div> -->
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs px-2 py-1 bg-black/10 dark:bg-white/10 rounded">Next.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 rounded">WebSocket</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">Prisma</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">Redis</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">RabbitMQ</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <!-- <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Live Demo</a> -->
-                            <a href="https://github.com/Banti4750/Chat-App-Microservices" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Binance Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                        <!-- <i class="fas fa-brain text-6xl text-white"></i> -->
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/binance.jpeg"
-                            alt="Binance">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Binance</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Real-time blockchain indexer with microservices architecture for scalable processing and
-                            monitoring.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 rounded">Tailwind
-                                CSS</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded">Node.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Prisma</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 rounded">WebSocket</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">ETH</span>
-                            <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">ERC-20</span>
-
-                        </div>
-                        <div class="flex gap-3">
-
-                            <a href="https://github.com/Banti4750/binance" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Solana Staking Contract -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-                        <!-- <i class="fas fa-coins text-6xl text-white"></i> -->
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/stack_sol.jpeg"
-                            alt="Solana Staking Contract">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Solana Staking Contract</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Modern Solana staking contract built with Anchor framework for SOL staking with dynamic
-                            points system.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-orange-100 dark:bg-orange-900/50 text-orange-800 dark:text-orange-200 rounded">Rust</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200 rounded">Anchor</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">Solana</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">React</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://stake-sol-git-main-banti-kumars-projects.vercel.app/" target="_blank">Live
-                                Demo</a>
-                            <a href="https://github.com/Banti4750/Stake-Sol" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ETH Staking Smart Contract -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
-                        <!-- <i class="fas fa-shield-alt text-6xl text-white"></i> -->
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/stackETH.jpeg"
-                            alt="Binance">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">ETH Staking Contract</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Secure Ethereum staking contract with Trump Coin rewards, featuring reentrancy protection
-                            and pausable functionality.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200 rounded">Solidity</span>
-                            <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">ERC-20</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Ethereum</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://reward-eth-frontend-d66f.vercel.app/" target="_blank">Live
-                                demo</a>
-                            <a href="https://github.com/Banti4750/StakeETHReward?tab=readme-ov-file" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- InheritETH Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/inheriteth.jpeg"
-                            alt="InheritETH">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">InheritETH</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Decentralized ETH inheritance system with Solidity smart contracts and Chainlink automation
-                            for secure nominee transfers.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200 rounded">Solidity</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-orange-100 dark:bg-orange-900/50 text-orange-800 dark:text-orange-200 rounded">Foundry</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded">Chainlink</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">ETH</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://inherit-eth-client.vercel.app/" target="_blank">Live
-                                demo</a>
-                            <a href="https://github.com/Banti4750/InheritETH" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Sundown Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/sun-down.jpeg"
-                            alt="Sundown">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Sundown</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Sondown Studio is a landing page, featuring modern UI, smooth animations, and interactive
-                            design.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs px-2 py-1 bg-black/10 dark:bg-white/10 rounded">Tailwind
-                                CSS</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 rounded">WebSocket</span>
-
-                            <span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://sundown-git-main-banti-kumars-projects.vercel.app/" target="_blank">Live
-                                demo</a>
-                            <a href="https://github.com/Banti4750/Sundown" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wallet Project -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="h-48 bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center">
-                        <img style="width: 100%; height: 195px; object-fit: fill;" src="projectimage/wallet.jpeg"
-                            alt="Wallet">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Phantom Wallet</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            ETH wallet for send and recive ETH
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="text-xs px-2 py-1 bg-black/10 dark:bg-white/10 rounded">Next.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200 rounded">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-200 rounded">WebSocket</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 rounded">Prisma</span>
-                            <span class="text-xs px-2 py-1 bg-black/10 dark:bg-white/10 rounded">Tailwind
-                                CSS</span>
-                        </div>
-                        <div class="flex gap-16">
-                            <a class="px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
-                                href="https://eth-dapp-final.vercel.app/" target="_blank">Live
-                                demo</a>
-                            <a href="https://github.com/Banti4750/wallet" target="_blank"
-                                class="px-3 py-1 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition transform hover:-translate-y-1">View
-                                Code</a>
-                        </div>
-                    </div>
-                </div>
+    <!-- CONTACT -->
+    <section id="contact" class="relative py-24 md:py-32 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="section-rule mb-12 reveal">
+                <span>05 / contact</span>
             </div>
-        </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 bg-white dark:bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Professional Experience</h2>
-            <div class="space-y-8">
-                <!-- Current Experience -->
-                <div
-                    class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-xl shadow-lg border border-blue-100 dark:border-gray-700">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                        <div>
-                            <h3 class="text-xl font-semibold text-blue-600 dark:text-blue-400">Web Developer Intern</h3>
-                            <h4 class="text-lg font-medium text-gray-700 dark:text-gray-300">Orange Essence Technologies
-                            </h4>
-                        </div>
-                        <div class="flex items-center gap-2 mt-2 md:mt-0">
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 rounded-full text-sm font-medium">
-                                Current
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-6 reveal">
+                    <h2 class="text-4xl md:text-6xl font-semibold text-white leading-[1.05] mb-6">
+                        Got an idea?<br>
+                        <span class="text-acid">Let's build it.</span>
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed max-w-md mb-10">
+                        Open to full-time roles and  freelance gigs.
+                        Drop a line — I usually reply within a day.
+                    </p>
+
+                    <div class="space-y-4 font-mono text-sm">
+                        <a href="mailto:bantikumar6203818460@gmail.com" class="flex items-center gap-4 group">
+                            <span class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center group-hover:border-acid/40 group-hover:text-acid transition">
+                                <i class="fas fa-envelope text-sm"></i>
                             </span>
-                            <span class="text-gray-500 dark:text-gray-400 text-sm">Mar 2025 - Present</span>
-                        </div>
-                    </div>
-                    <div class="space-y-3 text-gray-600 dark:text-gray-300">
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-rocket text-blue-500 mt-1"></i>
-                            <p>Contributed to internal B2B platforms development, taking ownership of both frontend and
-                                backend tasks using React and Node.js, delivering scalable modules that reduced page
-                                load times by 25%</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-database text-blue-500 mt-1"></i>
-                            <p>Led backend migration from MongoDB to MySQL, redesigning schema and replacing Mongoose
-                                with Prisma ORM, resulting in 30% faster queries and improved data consistency</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-code text-blue-500 mt-1"></i>
-                            <p>Refactored REST APIs using Express.js and Prisma, simplifying code structure and
-                                improving backend maintainability and test coverage by 20%</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-paint-brush text-blue-500 mt-1"></i>
-                            <p>Built responsive and accessible UI components with Tailwind CSS, enhancing user
-                                experience and achieving a 15% increase in user engagement</p>
+                            <span class="text-gray-400 group-hover:text-acid transition">bantikumar6203818460@gmail.com</span>
+                        </a>
+                        <a href="tel:+916203818460" class="flex items-center gap-4 group">
+                            <span class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center group-hover:border-acid/40 group-hover:text-acid transition">
+                                <i class="fas fa-phone text-sm"></i>
+                            </span>
+                            <span class="text-gray-400 group-hover:text-acid transition">+91 6203818460</span>
+                        </a>
+                        <a href="https://github.com/Banti4750" target="_blank" class="flex items-center gap-4 group">
+                            <span class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center group-hover:border-acid/40 group-hover:text-acid transition">
+                                <i class="fab fa-github text-sm"></i>
+                            </span>
+                            <span class="text-gray-400 group-hover:text-acid transition">github.com/Banti4750</span>
+                        </a>
+                        <a href="https://x.com/Banti_Kumar_62" target="_blank" class="flex items-center gap-4 group">
+                            <span class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center group-hover:border-acid/40 group-hover:text-acid transition">
+                                <i class="fab fa-x-twitter text-sm"></i>
+                            </span>
+                            <span class="text-gray-400 group-hover:text-acid transition">x.com/Banti_Kumar_62</span>
+                        </a>
+                        <div class="flex items-center gap-4">
+                            <span class="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-gray-500">
+                                <i class="fas fa-map-marker-alt text-sm"></i>
+                            </span>
+                            <span class="text-gray-500">Bhopal, Madhya Pradesh, India</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Education Section -->
-    <section class="py-20 bg-gray-50 dark:bg-gray-800/50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Education & Learning</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Formal Education -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-2xl"></i>
-                        </div>
+                <div class="md:col-span-6 reveal">
+                    <form id="contact-form" class="glass rounded-xl p-6 md:p-8 space-y-5">
+                        <div class="font-mono text-xs text-gray-500 mb-2">// send a message</div>
                         <div>
-                            <h3 class="text-xl font-semibold">Bachelor of Technology</h3>
-                            <p class="text-gray-600 dark:text-gray-300">Computer Science and Engineering</p>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <p class="font-medium">Patel College of Science and Technology</p>
-                        <p class="text-gray-600 dark:text-gray-300">Bhopal, Madhya Pradesh</p>
-                        <p class="text-sm text-blue-600 dark:text-blue-400">April 2022 – May 2026</p>
-                    </div>
-                </div>
-
-                <!-- Online Learning -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-laptop-code text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold">Specialized Courses</h3>
-                            <p class="text-gray-600 dark:text-gray-300">Online Learning</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Full-Stack Web Development - 100XDevs (Harkirat Singh)</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Blockchain & Smart Contracts - 100XDevs</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>DevOps - 100XDevs</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fas fa-check-circle text-green-500"></i>
-                            <span>Data Structures & Algorithms - GeeksforGeeks, Coding Blocks</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section id="achievements" class="py-20 bg-white dark:bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Achievements & Rankings</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- GeeksforGeeks -->
-                <div
-                    class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-xl shadow-lg border border-green-100 dark:border-green-800 text-center transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-code text-white text-2xl"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">GeeksforGeeks</h3>
-                    <div class="space-y-1 text-sm">
-                        <p class="text-green-600 dark:text-green-400 font-medium">Global Rank: #900</p>
-                        <p class="text-green-600 dark:text-green-400 font-medium">College Rank: #1</p>
-                        <p class="text-gray-600 dark:text-gray-300">Score: 3100+</p>
-                    </div>
-                </div>
-
-                <!-- LeetCode -->
-                <div
-                    class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 p-6 rounded-xl shadow-lg border border-orange-100 dark:border-orange-800 text-center transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 bg-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-brain text-white text-2xl"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">LeetCode</h3>
-                    <div class="space-y-1 text-sm">
-                        <p class="text-orange-600 dark:text-orange-400 font-medium">500+ Problems Solved</p>
-                        <p class="text-orange-600 dark:text-orange-400 font-medium">Contest Rating: 1490+</p>
-                        <p class="text-gray-600 dark:text-gray-300">Active Problem Solver</p>
-                    </div>
-                </div>
-
-                <!-- Codeforces -->
-                <div
-                    class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-6 rounded-xl shadow-lg border border-blue-100 dark:border-blue-800 text-center transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-trophy text-white text-2xl"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">Codeforces</h3>
-                    <div class="space-y-1 text-sm">
-                        <p class="text-blue-600 dark:text-blue-400 font-medium">Max Rating: 1052</p>
-                        <p class="text-gray-600 dark:text-gray-300">Competitive Programming</p>
-                        <p class="text-gray-600 dark:text-gray-300">Regular Participant</p>
-                    </div>
-                </div>
-
-                <!-- CodeChef -->
-                <div
-                    class="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-6 rounded-xl shadow-lg border border-purple-100 dark:border-purple-800 text-center transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-medal text-white text-2xl"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg mb-2">CodeChef</h3>
-                    <div class="space-y-1 text-sm">
-                        <p class="text-purple-600 dark:text-purple-400 font-medium">Max Rating: 1592</p>
-                        <p class="text-gray-600 dark:text-gray-300">Algorithm Contests</p>
-                        <p class="text-gray-600 dark:text-gray-300">3-Star Coder</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Summary Stats -->
-            <div
-                class="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-xl shadow-lg">
-                <h3 class="text-xl font-semibold text-center mb-6">Problem Solving Summary</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div>
-                        <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">1600+</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300">Total Problems Solved</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold text-green-600 dark:text-green-400">#1</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300">College Rank (GFG)</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">4+</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300">Platforms Active</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold text-orange-600 dark:text-orange-400">Daily</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300">Problem Solving</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800/50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Get In Touch</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="animate-slide-up">
-                    <h3 class="text-xl font-semibold mb-6">Let's Connect!</h3>
-                    <p class="mb-8 text-gray-600 dark:text-gray-300 leading-relaxed">
-                        I'm always excited to discuss new opportunities, collaborate on interesting projects,
-                        or just have a conversation about technology and innovation. Feel free to reach out!
-                    </p>
-
-                    <div class="space-y-6">
-                        <div class="flex items-center group">
-                            <div
-                                class="p-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 mr-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/70 transition-colors">
-                                <i class="fas fa-envelope text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Email</h4>
-                                <a href="mailto:bantikumar6203818460@gmail.com"
-                                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                                    bantikumar6203818460@gmail.com
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center group">
-                            <div
-                                class="p-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 mr-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/70 transition-colors">
-                                <i class="fas fa-phone text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Phone</h4>
-                                <a href="tel:+916203818460"
-                                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                                    +91 6203818460
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center group">
-                            <div
-                                class="p-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 mr-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/70 transition-colors">
-                                <i class="fab fa-github text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">GitHub</h4>
-                                <a href="https://github.com/Banti4750" target="_blank"
-                                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                                    github.com/Banti4750
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center group">
-                            <div
-                                class="p-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 mr-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/70 transition-colors">
-                                <i class="fab fa-twitter text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Twitter</h4>
-                                <a href="https://x.com/Banti_Kumar_62" target="_blank"
-                                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                                    x.com/BantiKumar62
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center group">
-                            <div
-                                class="p-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 mr-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/70 transition-colors">
-                                <i class="fas fa-map-marker-alt text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium">Location</h4>
-                                <p class="text-gray-600 dark:text-gray-300">Bhopal, Madhya Pradesh, India</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="animate-slide-up">
-                    <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">Name</label>
+                            <label for="name" class="block text-xs font-mono text-gray-500 mb-2">name</label>
                             <input type="text" id="name" name="name" required
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 transition-colors">
+                                class="w-full px-4 py-3 bg-ink-950 border border-white/10 rounded-lg focus:outline-none focus:border-acid/50 text-white placeholder-gray-600 transition"
+                                placeholder="jane doe">
                         </div>
-
                         <div>
-                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                            <label for="email" class="block text-xs font-mono text-gray-500 mb-2">email</label>
                             <input type="email" id="email" name="email" required
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 transition-colors">
+                                class="w-full px-4 py-3 bg-ink-950 border border-white/10 rounded-lg focus:outline-none focus:border-acid/50 text-white placeholder-gray-600 transition"
+                                placeholder="jane@company.com">
                         </div>
-
                         <div>
-                            <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
+                            <label for="subject" class="block text-xs font-mono text-gray-500 mb-2">subject</label>
                             <input type="text" id="subject" name="subject" required
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 transition-colors">
+                                class="w-full px-4 py-3 bg-ink-950 border border-white/10 rounded-lg focus:outline-none focus:border-acid/50 text-white placeholder-gray-600 transition"
+                                placeholder="let's collaborate">
                         </div>
-
                         <div>
-                            <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                            <label for="message" class="block text-xs font-mono text-gray-500 mb-2">message</label>
                             <textarea id="message" name="message" rows="4" required
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 transition-colors"></textarea>
+                                class="w-full px-4 py-3 bg-ink-950 border border-white/10 rounded-lg focus:outline-none focus:border-acid/50 text-white placeholder-gray-600 transition resize-none"
+                                placeholder="tell me about your idea..."></textarea>
                         </div>
-
-                        <button type="submit" id="submit-btn"
-                            class="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-blue-500/30">
-                            <span id="btn-text">Send Message</span>
-                            <i id="btn-spinner" class="fas fa-spinner fa-spin hidden ml-2"></i>
+                        <button type="submit" id="submit-btn" class="btn-primary w-full justify-center">
+                            <span id="btn-text">send message</span>
+                            <i id="btn-spinner" class="fas fa-spinner fa-spin hidden"></i>
                         </button>
                     </form>
-                    <div id="form-message" class="mt-4 p-4 rounded-lg hidden"></div>
+                    <div id="form-message" class="mt-4 p-4 rounded-lg hidden font-mono text-sm"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Banti Kumar. All rights reserved.</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://github.com/Banti4750" target="_blank"
-                        class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition transform hover:scale-110">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="https://x.com/Banti_Kumar_62" target="_blank"
-                        class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition transform hover:scale-110">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="mailto:bantikumar6203818460@gmail.com"
-                        class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition transform hover:scale-110">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </a>
-                    <a href="tel:+916203818460"
-                        class="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition transform hover:scale-110">
-                        <i class="fas fa-phone text-xl"></i>
-                    </a>
-                </div>
+    <footer class="border-t border-white/5 py-10 bg-ink-950">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="font-mono text-xs text-gray-500">
+                © 2025 banti kumar · crafted with <span class="text-acid">&lt;3</span> in bhopal
+            </div>
+            <div class="flex items-center gap-5 text-gray-500">
+                <a href="https://github.com/Banti4750" target="_blank" class="hover:text-acid transition"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/Banti_Kumar_62" target="_blank" class="hover:text-acid transition"><i class="fab fa-x-twitter"></i></a>
+                <a href="mailto:bantikumar6203818460@gmail.com" class="hover:text-acid transition"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+916203818460" class="hover:text-acid transition"><i class="fas fa-phone"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-
-
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        // Spotlight cursor
+        const spotlight = document.getElementById('spotlight');
+        document.addEventListener('mousemove', (e) => {
+            spotlight.style.setProperty('--mx', e.clientX + 'px');
+            spotlight.style.setProperty('--my', e.clientY + 'px');
         });
 
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        // Mobile menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        // Check for saved theme preference or default to 'light' mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-
-        const toggleTheme = () => {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        };
-
-        themeToggle.addEventListener('click', toggleTheme);
-        themeToggleMobile.addEventListener('click', toggleTheme);
-
-        // Smooth scrolling for navigation links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     mobileMenu.classList.add('hidden');
                 }
             });
         });
 
-        // Enhanced form submission handler
-        document.addEventListener('DOMContentLoaded', function () {
-            const contactForm = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const btnSpinner = document.getElementById('btn-spinner');
-            const formMessage = document.getElementById('form-message');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', function (event) {
-                    event.preventDefault();
-
-                    // Show loading state
-                    submitBtn.disabled = true;
-                    btnText.textContent = 'Sending...';
-                    btnSpinner.classList.remove('hidden');
-
-                    // Get form data
-                    const formData = new FormData(contactForm);
-                    const name = formData.get('name');
-                    const email = formData.get('email');
-                    const subject = formData.get('subject');
-                    const message = formData.get('message');
-
-                    // Create mailto URL
-                    const mailtoSubject = encodeURIComponent(subject || 'Contact from Portfolio Website');
-                    const mailtoBody = encodeURIComponent(
-                        `Hi Banti,\n\n` +
-                        `Name: ${name}\n` +
-                        `Email: ${email}\n\n` +
-                        `Message:\n${message}\n\n` +
-                        `Best regards,\n${name}`
-                    );
-
-                    const mailtoUrl = `mailto:bantikumar6203818460@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
-
-                    // Try to open email client
-                    try {
-                        window.location.href = mailtoUrl;
-
-                        // Show success message
-                        setTimeout(() => {
-                            showMessage('Thank you! Your email client should open with the pre-filled message.', 'success');
-                            contactForm.reset();
-                        }, 500);
-
-                    } catch (error) {
-                        console.error('Error opening email client:', error);
-                        showMessage('Error opening email client. Please contact directly at bantikumar6203818460@gmail.com', 'error');
-                    } finally {
-                        // Reset button state
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                            btnText.textContent = 'Send Message';
-                            btnSpinner.classList.add('hidden');
-                        }, 1000);
-                    }
-                });
-            }
-
-            function showMessage(text, type) {
-                formMessage.textContent = text;
-                formMessage.className = `mt-4 p-4 rounded-lg ${type === 'success'
-                    ? 'bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800'
-                    : 'bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-800'
-                    }`;
-                formMessage.classList.remove('hidden');
-
-                // Hide message after 5 seconds
-                setTimeout(() => {
-                    formMessage.classList.add('hidden');
-                }, 5000);
-            }
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
+        // Reveal on scroll
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // Observe all sections for animations
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+        // Live clock
+        function tickClock() {
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const el = document.getElementById('clock');
+            if (el) el.textContent = `${hh}:${mm} ist`;
+        }
+        tickClock();
+        setInterval(tickClock, 30 * 1000);
 
-        // Add loading animation
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
+        // Contact form
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contact-form');
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnSpinner = document.getElementById('btn-spinner');
+            const msg = document.getElementById('form-message');
+
+            if (!form) return;
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                btn.disabled = true;
+                btnText.textContent = 'sending...';
+                btnSpinner.classList.remove('hidden');
+
+                const data = new FormData(form);
+                const subject = encodeURIComponent(data.get('subject') || 'Contact from Portfolio');
+                const body = encodeURIComponent(
+                    `Hi Banti,\n\n` +
+                    `Name: ${data.get('name')}\n` +
+                    `Email: ${data.get('email')}\n\n` +
+                    `Message:\n${data.get('message')}\n\n` +
+                    `— ${data.get('name')}`
+                );
+                window.location.href = `mailto:bantikumar6203818460@gmail.com?subject=${subject}&body=${body}`;
+
+                setTimeout(() => {
+                    msg.textContent = '> message sent. your email client should be open.';
+                    msg.className = 'mt-4 p-4 rounded-lg font-mono text-sm bg-acid/10 border border-acid/30 text-acid';
+                    msg.classList.remove('hidden');
+                    form.reset();
+                    btn.disabled = false;
+                    btnText.textContent = 'send message';
+                    btnSpinner.classList.add('hidden');
+                    setTimeout(() => msg.classList.add('hidden'), 6000);
+                }, 600);
+            });
         });
     </script>
 </body>
